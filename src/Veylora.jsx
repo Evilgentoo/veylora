@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import SettingsProfile from './SettingsProfile.jsx';
 import Yozune from './Yozune';
 import Kairune from './Kairune';
 import Tunekai from './Tunekai';
@@ -11,7 +12,10 @@ import {
   Star, Settings as SettingsIcon, Folder, Image as ImageIcon, Wifi, Volume2, BatteryFull, Sun, Minus, Square, X, ChevronRight, Check, Film, Play, Gamepad2, Maximize2, Minimize2 } from 'lucide-react';
 
 const settingsSections = [
-  { id: 'appearance', label: 'Appearance' },
+  { id: 'profile', label: 'Profile' },
+  { id: 'wallpaper', label: 'Wallpaper' },
+  { id: 'theme', label: 'Theme & Colors' },
+  { id: 'widgets', label: 'Widgets' },
   { id: 'system', label: 'System' },
   { id: 'taskbar', label: 'Taskbar' },
   { id: 'tab-cloak', label: 'Tab Cloak' },
@@ -358,7 +362,7 @@ export default function Veylora() {
   useEffect(() => { localStorage.setItem('veylora.taskbarScaleX', String(taskbarScaleX)); }, [taskbarScaleX]);
   useEffect(() => { localStorage.setItem('veylora.taskbarScaleY', String(taskbarScaleY)); }, [taskbarScaleY]);
 
-  const [activeSection, setActiveSection] = useState('appearance');
+  const [activeSection, setActiveSection] = useState('wallpaper');
   const [tabCloakPreset, setTabCloakPreset] = useState(() => {
     try {
       const saved = localStorage.getItem('veylora.tabCloakPreset');
@@ -1007,7 +1011,8 @@ export default function Veylora() {
                 <h1>{settingsSections.find(s => s.id === activeSection)?.label.toUpperCase()}</h1>
                 <p>Make Veylora feel like yours.</p>
               </div>
-              {activeSection === 'appearance' && (
+              {activeSection === 'profile' && <SettingsProfile />}
+              {activeSection === 'wallpaper' && (
                 <div className="appearance-stack">
                   <div className="settings-card">
                     <div className="card-heading">WALLPAPER <span className="tiny-tag">LOCAL PRESETS</span></div>
@@ -1038,6 +1043,10 @@ export default function Veylora() {
                     </div>
                     <p className="setting-note">Choose an image or live video wallpaper. Your selection is saved on this device.</p>
                   </div>
+                </div>
+              )}
+              {activeSection === 'theme' && (
+                <div className="appearance-stack">
                   <div className="settings-card">
                     <div className="card-heading">ACCENT COLOR <span className="tiny-tag">INTERFACE</span></div>
                     <div className="theme-label">COLOR MODE</div>
@@ -1061,6 +1070,10 @@ export default function Veylora() {
                     </div>
                     <p className="setting-note">Accent colors update Veylora's highlights and are saved on this device.</p>
                   </div>
+                </div>
+              )}
+              {activeSection === 'widgets' && (
+                <div className="appearance-stack">
               <div className="settings-card widgets-card">
                 <div className="card-heading">WIDGETS <span className="tiny-tag">DESKTOP</span></div>
                 {[['digital', 'DIGITAL CLOCK'], ['calendar', 'CALENDAR'], ['analog', 'ANALOG CLOCK']].map(([id, label]) => (

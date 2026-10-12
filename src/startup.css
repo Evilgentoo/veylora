@@ -1,0 +1,122 @@
+/* VEYLORA_STARTUP */
+.vs-root {
+  --vs-accent: var(--accent, #f18ac9);
+  position: fixed; inset: 0; z-index: 2147483000;
+  background: #050507; color: #f2f2f5;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  overflow: hidden; transition: opacity .45s ease, transform .45s ease;
+}
+.vs-root.leaving { opacity: 0; transform: scale(1.03); pointer-events: none; }
+.vs-root::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 50% 46%, rgba(255,255,255,.07), transparent 52%);
+}
+.vs-root::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px);
+}
+.vs-root button { font: inherit; color: inherit; cursor: pointer; }
+
+/* boot */
+.vs-boot { position: absolute; inset: 0; }
+.vs-corner { position: absolute; width: 22px; height: 22px; border: 0 solid rgba(255,255,255,.28); }
+.vs-corner.tl { top: 22px; left: 22px; border-width: 1px 0 0 1px; }
+.vs-corner.tr { top: 22px; right: 22px; border-width: 1px 1px 0 0; }
+.vs-corner.bl { bottom: 22px; left: 22px; border-width: 0 0 1px 1px; }
+.vs-corner.br { bottom: 22px; right: 22px; border-width: 0 1px 1px 0; }
+.vs-log {
+  position: absolute; left: 24px; top: 40px; bottom: 40px; width: 376px; max-width: calc(100vw - 48px);
+  display: flex; flex-direction: column; gap: 14px; padding: 14px 14px 12px;
+  background: rgba(16,16,20,.86); border: 1px solid rgba(255,255,255,.14); border-radius: 14px;
+  font-size: 12px; z-index: 1;
+}
+.vs-log header { display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .08em; }
+.vs-log header em { margin-left: auto; font-style: normal; font-size: 10px; padding: 3px 8px; border: 1px solid rgba(255,255,255,.3); border-radius: 6px; opacity: .85; }
+.vs-dots { display: inline-flex; gap: 5px; }
+.vs-dots b { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(255,255,255,.6); }
+.vs-dots b:first-child { background: #fff; }
+.vs-now { display: flex; justify-content: space-between; gap: 12px; }
+.vs-now small { display: block; font-size: 9px; letter-spacing: .12em; opacity: .55; margin-bottom: 4px; }
+.vs-now strong { font-size: 14px; font-weight: 600; }
+.vs-eta { text-align: right; }
+.vs-eta span { font-size: 12px; opacity: .9; }
+.vs-steps { list-style: none; margin: 0; padding: 12px 0 0; border-top: 1px solid rgba(255,255,255,.1); display: grid; gap: 9px; }
+.vs-steps li { display: flex; gap: 10px; opacity: .42; }
+.vs-steps li span { width: 12px; text-align: center; }
+.vs-steps li.done { opacity: .85; }
+.vs-steps li.cur { opacity: 1; color: #fff; }
+.vs-lines { margin-top: auto; display: grid; gap: 4px; font-size: 10.5px; opacity: .7; overflow: hidden; }
+.vs-lines span { opacity: .6; }
+.vs-prompt { background: #f4f4f6; color: #101014; border-radius: 9px; padding: 9px 11px; font-size: 11px; display: flex; justify-content: space-between; gap: 8px; white-space: nowrap; overflow: hidden; }
+.vs-prompt i { font-style: normal; opacity: .6; }
+.vs-ver { position: absolute; top: 40px; right: 48px; display: grid; gap: 4px; text-align: right; font-size: 10.5px; letter-spacing: .08em; opacity: .7; }
+.vs-ver b { opacity: 1; color: #fff; }
+.vs-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; pointer-events: none; }
+.vs-center button { pointer-events: auto; }
+.vs-orb {
+  width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; color: #fff;
+  border: 1px solid rgba(255,255,255,.2);
+  background: radial-gradient(circle, rgba(255,255,255,.12), rgba(255,255,255,.02) 70%);
+  box-shadow: 0 0 60px color-mix(in srgb, var(--vs-accent) 28%, transparent);
+  animation: vs-pulse 2.4s ease-in-out infinite;
+}
+@keyframes vs-pulse { 50% { box-shadow: 0 0 90px color-mix(in srgb, var(--vs-accent) 45%, transparent); transform: scale(1.03); } }
+.vs-octo { font-size: 12px; display: grid; place-items: center; }
+.vs-octo .brand-mark { margin: 0; vertical-align: baseline; }
+.vs-bar { display: flex; gap: 3px; }
+.vs-bar i { width: 5px; height: 9px; background: rgba(255,255,255,.18); }
+.vs-bar i.on { background: #fff; }
+.vs-meta { display: flex; gap: 14px; align-items: center; font-size: 11px; letter-spacing: .1em; opacity: .85; }
+.vs-meta button { background: none; border: 1px solid rgba(255,255,255,.35); border-radius: 6px; padding: 3px 10px; letter-spacing: .1em; }
+.vs-meta button:hover { background: rgba(255,255,255,.12); }
+
+/* shared */
+.vs-stage { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; z-index: 1; }
+.vs-avatar {
+  width: 104px; height: 104px; border-radius: 50%; overflow: hidden; position: relative; padding: 0;
+  display: grid; place-items: center; background: #e9e9ee; color: #17171c; border: 2px solid rgba(255,255,255,.7);
+  font-size: 40px; font-weight: 700;
+}
+.vs-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vs-avatar.big { cursor: pointer; }
+.vs-avatar em { position: absolute; inset: auto 0 0 0; padding: 5px 0; background: rgba(0,0,0,.55); color: #fff; font-style: normal; font-size: 10px; opacity: 0; transition: opacity .15s; }
+.vs-avatar.big:hover em { opacity: 1; }
+.vs-card { width: min(360px, 100%); display: grid; gap: 12px; justify-items: center; text-align: center; padding: 26px 24px; background: rgba(16,16,20,.88); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; z-index: 1; }
+.vs-card h2 { margin: 0; font-size: 22px; }
+.vs-card p { margin: 0 0 4px; font-size: 12px; opacity: .65; }
+.vs-input { width: 100%; box-sizing: border-box; padding: 11px 13px; border-radius: 10px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); color: #fff; font: inherit; font-size: 13px; outline: none; }
+.vs-input:focus { border-color: var(--vs-accent); }
+.vs-btn { padding: 10px 22px; border-radius: 10px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); }
+.vs-btn.primary { background: var(--vs-accent); border-color: transparent; color: #111; font-weight: 700; width: 100%; }
+.vs-err { color: #ff8a8a; font-size: 12px; }
+
+/* login */
+.vs-login { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.vs-clock { margin-top: 5vh; text-align: center; display: grid; gap: 4px; }
+.vs-clock strong { font-size: 40px; letter-spacing: .04em; }
+.vs-clock span { font-size: 12px; opacity: .65; }
+.vs-who { margin: auto 0; display: grid; justify-items: center; gap: 10px; }
+.vs-who h3 { margin: 6px 0 0; font-size: 22px; }
+.vs-who p { margin: 0; font-size: 12px; opacity: .6; }
+.vs-pw { display: flex; width: 300px; max-width: 86vw; border: 1px solid rgba(255,255,255,.28); border-radius: 12px; background: rgba(255,255,255,.06); overflow: hidden; }
+.vs-pw:focus-within { border-color: var(--vs-accent); }
+.vs-pw input { flex: 1; min-width: 0; padding: 12px 14px; background: none; border: 0; outline: none; color: #fff; font: inherit; font-size: 13px; }
+.vs-pw button { width: 42px; background: rgba(255,255,255,.08); border: 0; border-left: 1px solid rgba(255,255,255,.2); font-size: 20px; }
+.vs-pw.bad { animation: vs-shake .4s; border-color: #ff6b6b; }
+@keyframes vs-shake { 20%,60% { transform: translateX(-7px); } 40%,80% { transform: translateX(7px); } }
+.vs-root .vs-link { background: none; border: 0; font-size: 11px; opacity: .6; text-decoration: underline; padding: 4px; }
+.vs-root .vs-link:hover { opacity: 1; }
+.vs-reset { display: grid; gap: 4px; justify-items: center; font-size: 11px; opacity: .85; max-width: 300px; }
+.vs-power { display: flex; gap: 10px; margin-bottom: 28px; }
+.vs-power button { padding: 8px 16px; font-size: 12px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.2); border-radius: 9px; }
+.vs-power button:hover { background: rgba(255,255,255,.14); }
+.vs-off { position: absolute; inset: 0; width: 100%; display: grid; place-content: center; justify-items: center; gap: 14px; background: #000; border: 0; color: rgba(255,255,255,.6); z-index: 1; font-size: 12px; letter-spacing: .1em; }
+
+@media (max-width: 760px) {
+  .vs-log { display: none; }
+  .vs-ver { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vs-orb, .vs-pw.bad { animation: none; }
+  .vs-root { transition: opacity .2s; }
+}
