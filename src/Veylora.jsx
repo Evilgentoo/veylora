@@ -63,23 +63,14 @@ const LOCAL_WALLPAPER_PRESETS = [
   { id: 'black-lambo', name: 'Black Lambo', file: import.meta.env.BASE_URL + 'wallpapers/black-lambo.png', category: 'AUTOMOTIVE', type: 'image' },
   { id: 'broly', name: 'Broly', file: import.meta.env.BASE_URL + 'wallpapers/broly.jpg', category: 'ANIME', type: 'image' },
   { id: 'evangellion', name: 'Evangelion', file: import.meta.env.BASE_URL + 'wallpapers/evangellion.jpg', category: 'ANIME', type: 'image' },
-  { id: 'itachi-uchiha-snow', name: 'Itachi: Snowfall', file: import.meta.env.BASE_URL + 'wallpapers/itachi-uchiha-snow.mp4', category: 'LIVE WALLPAPER', type: 'video' },
-  { id: 'knight-of-the-abyss', name: 'Knight of the Abyss', file: import.meta.env.BASE_URL + 'wallpapers/knight-of-the-abyss.mp4', category: 'LIVE WALLPAPER', type: 'video' },
   { id: 'luffy', name: 'Luffy', file: import.meta.env.BASE_URL + 'wallpapers/luffy.png', category: 'ANIME', type: 'image' },
-  { id: 'neon-gaze', name: 'Neon Gaze', file: import.meta.env.BASE_URL + 'wallpapers/neon-gaze-anime-girl.mp4', category: 'LIVE WALLPAPER', type: 'video' },
   { id: 'red-gun-girl', name: 'Red Gun Girl', file: import.meta.env.BASE_URL + 'wallpapers/red-gun-girl.png', category: 'ANIME', type: 'image' },
-  { id: 'shattered-reflection', name: 'Shattered Reflection', file: import.meta.env.BASE_URL + 'wallpapers/shattered-reflection-anime-eyes.mp4', category: 'LIVE WALLPAPER', type: 'video' },
-  { id: 'sonic-x-shadow', name: 'Sonic × Shadow', file: import.meta.env.BASE_URL + 'wallpapers/sonic-x-shadow.mp4', category: 'LIVE WALLPAPER', type: 'video' },
   { id: 'ssj-goku-blue', name: 'SSJ Goku Blue', file: import.meta.env.BASE_URL + 'wallpapers/ssj-goku-blue.png', category: 'ANIME', type: 'image' },
   { id: 'white-bird', name: 'White Bird', file: import.meta.env.BASE_URL + 'wallpapers/white-bird.png', category: 'NATURE', type: 'image' },
   { id: 'winter-hills', name: 'Winter Hills', file: import.meta.env.BASE_URL + 'wallpapers/winter-hills.png', category: 'LANDSCAPE', type: 'image' },
   { id: 'chainsaw-man', name: 'Chainsaw Man', file: import.meta.env.BASE_URL + 'wallpapers/chainsaw-man.jpg', category: 'ANIME', type: 'image' },
   { id: 'makima', name: 'Makima: Control Devil', file: import.meta.env.BASE_URL + 'wallpapers/makima.jpg', category: 'ANIME', type: 'image' },
   { id: 'fire-and-earth', name: 'Fire & Earth', file: import.meta.env.BASE_URL + 'wallpapers/fire-and-earth.png', category: 'ANIME', type: 'image' },
-  { id: 'hyakkimaru-reclaimed', name: 'Hyakkimaru: Reclaimed', file: import.meta.env.BASE_URL + 'wallpapers/hyakkimaru-reclaimed.mp4', category: 'LIVE WALLPAPER', type: 'video' },
-  { id: 'hells-paradise', name: "Hell's Paradise", file: import.meta.env.BASE_URL + 'wallpapers/hells-paradise.mp4', category: 'LIVE WALLPAPER', type: 'video' },
-  { id: 'black-swordsman-crimson-eclipse', name: 'Black Swordsman: Crimson Eclipse', file: import.meta.env.BASE_URL + 'wallpapers/black-swordsman-crimson-eclipse.mp4', category: 'LIVE WALLPAPER', type: 'video' },
-  { id: 'goku-black-ssj-rose', name: 'Goku Black: Super Saiyan Rosé', file: import.meta.env.BASE_URL + 'wallpapers/goku-black-ssj-rose.mp4', category: 'LIVE WALLPAPER', type: 'video' },
   { id: 'cell-black-white', name: 'Cell: Black & White', file: import.meta.env.BASE_URL + 'wallpapers/cell-black-white.png', category: 'ANIME', type: 'image' },
   { id: 'genshin-moonlight', name: 'Genshin: Moonlight', file: import.meta.env.BASE_URL + 'wallpapers/genshin-moonlight.png', category: 'GAMING', type: 'image' },
   { id: 'invincible-blue', name: 'Invincible: Blue', file: import.meta.env.BASE_URL + 'wallpapers/invincible-blue.png', category: 'INVINCIBLE', type: 'image' },
@@ -377,7 +368,7 @@ export default function Veylora() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 18, y: 18 });
   const [wallpaper, setWallpaper] = useState(() => {
-    try { return localStorage.getItem('veylora.wallpaper') || ''; } catch { return ''; }
+    try { const w = localStorage.getItem('veylora.wallpaper') || ''; return /\.(mp4|webm|mov)$/i.test(w) ? '' : w; } catch { return ''; }
   });
   const [theme, setTheme] = useState(() => {
     try { const v = localStorage.getItem('veylora.theme'); return ['dark', 'light', 'auto'].includes(v) ? v : 'dark'; } catch { return 'dark'; }
