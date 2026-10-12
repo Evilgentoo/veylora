@@ -4,4 +4,13 @@ dist
 .env.*
 *.bak-*
 *.bak
-public/gn-math
+
+# gn-math: only referenced assets
+public/gn-math/assets/*
+!public/gn-math/assets/174/
+!public/gn-math/assets/175/
+!public/gn-math/assets/176/
+!public/gn-math/assets/178/
+!public/gn-math/assets/187/
+!public/gn-math/assets/198/
+!public/gn-math/assets/angry-birds-cffa09e/
